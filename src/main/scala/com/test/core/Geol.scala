@@ -6,12 +6,11 @@ import com.test.TestApp.main
 import org.apache.spark.sql.{DataFrame, SparkSession}
 object Geol {
   val path = TestApp._configFile.getString("TEST.SOURCES.GEOL.PATH")
-  //val geo = TestApp.sc.textFile(path)
 
   def csvFile(): DataFrame = {
     //val filePath = _configFile.getString("TEST.SOURCES.GEOL.PATH")
     //val filePath = "src/main/resources/geolocation.csv"
-    val df = TestApp._spark.read.options(Map("inferSchema" -> "true", "sep" -> ",", "header" -> "true")). csv(path)
+    val df = TestApp._spark.read.options(Map("inferSchema" -> "true", "sep" -> ",", "header" -> "true")).csv(path)
     df.selectExpr("truckid", "driverid", "event", "city", "state", "velocity", "event_ind", "idling_ind")
   }
 

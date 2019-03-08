@@ -11,11 +11,10 @@ object TestApp extends App {
   val _configFile = ConfigFactory.parseFile(new File("src/main/resources/test.conf"))
   val _log: Logger = LoggerFactory.getLogger(TestApp.getClass)
 
-  val _spark = SparkSession.
+  val _spark : SparkSession = SparkSession.
     builder().
     master("local[*]").
     appName(_configFile.getString("TEST.APPS.NAME")).
-    //appName("TEST.APPS.NAME").
     getOrCreate()
 
     val geo = Geol.csvFile()
